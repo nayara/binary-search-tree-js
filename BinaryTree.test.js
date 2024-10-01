@@ -195,7 +195,7 @@ describe("BinaryTree", () => {
 
   describe("#breadthFirstSearch", () => {
     describe("when root is null", () => {
-      it("it returns null", () => {
+      it("it returns empty array", () => {
         const binaryTree = new BinarySearchTree();
         const result = binaryTree.breadthFirstSearch();
 
@@ -215,13 +215,48 @@ describe("BinaryTree", () => {
       });
     });
 
-    describe("when tree has elements", () => {
+    describe("when tree has many elements", () => {
       it("it returns the values in an array passing by each level", () => {
         const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
 
         const result = binaryTree.breadthFirstSearch();
 
         expect(result).toEqual([10, 5, 15, 4, 7, 14, 17]);
+      });
+    });
+  });
+
+  describe("#BFSGroupedByLevel", () => {
+    describe("when root is null", () => {
+      it("it returns empty array", () => {
+        const binaryTree = new BinarySearchTree();
+        const result = binaryTree.BFSGroupedByLevel();
+
+        expect(result).toEqual([]);
+      });
+    });
+
+    describe("when tree has only the root element", () => {
+      it("it return the root value", () => {
+        const binaryTree = BinarySearchTree.fromValues(4);
+
+        const result = binaryTree.BFSGroupedByLevel();
+
+        expect(result).toEqual([[4]]);
+        expect(binaryTree.root.left).toBeNull();
+        expect(binaryTree.root.right).toBeNull();
+      });
+    });
+
+    describe("when tree has many elements", () => {
+      it("it returns the values in an array passing by each level", () => {
+        const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
+
+        const result = binaryTree.BFSGroupedByLevel();
+
+        console.log(JSON.stringify(result));
+
+        expect(result).toEqual([[10], [5, 15], [4, 7, 14, 17]]);
       });
     });
   });

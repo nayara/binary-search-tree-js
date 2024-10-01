@@ -112,6 +112,36 @@ class BinarySearchTree {
 
     return result;
   }
+
+  BFSGroupedByLevel() {
+    if (this.root === null) return [];
+
+    const queue = new Queue();
+    queue.enqueue(this.root);
+
+    const result = [];
+    let resultLength = 0;
+
+    while (!queue.isEmpty()) {
+      const level = [];
+      let levelLength = 0;
+
+      // cannot let on the for because its updated on each interaction
+      const len = queue.size;
+
+      for (let i = 0; i < len; i++) {
+        const item = queue.dequeue();
+        level[levelLength++] = item.value;
+
+        if (item.left) queue.enqueue(item.left);
+        if (item.right) queue.enqueue(item.right);
+      }
+
+      result[resultLength++] = level;
+    }
+
+    return result;
+  }
 }
 
 BinarySearchTree.fromValues = function (...values) {

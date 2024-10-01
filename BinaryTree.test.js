@@ -148,8 +148,6 @@ describe("BinaryTree", () => {
 
         binaryTree.remove(4);
 
-        console.log("binaryTree", binaryTree);
-
         const expectedResult = binaryTree.find(4);
 
         expect(expectedResult).toBe("Value 4 not found");
@@ -185,15 +183,46 @@ describe("BinaryTree", () => {
     describe("when vertice to be removed has two childs", () => {
       it("it remove the node and replace with the vertice that has the nearest value", () => {});
       const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 7, 4);
-      console.log(JSON.stringify(binaryTree));
+
       binaryTree.remove(10);
 
       const deletedElement = binaryTree.find(10);
 
-      console.log(JSON.stringify(binaryTree));
-
       expect(deletedElement).toBe("Value 10 not found");
       expect(binaryTree.root.value).toBe(14);
+    });
+  });
+
+  describe("#breadthFirstSearch", () => {
+    describe("when root is null", () => {
+      it("it returns null", () => {
+        const binaryTree = new BinarySearchTree();
+        const result = binaryTree.breadthFirstSearch();
+
+        expect(result).toEqual([]);
+      });
+    });
+
+    describe("when tree has only the root element", () => {
+      it("it return the root value", () => {
+        const binaryTree = BinarySearchTree.fromValues(4);
+
+        const result = binaryTree.breadthFirstSearch();
+
+        expect(result).toEqual([4]);
+        expect(binaryTree.root.left).toBeNull();
+        expect(binaryTree.root.right).toBeNull();
+      });
+    });
+
+    describe("when tree has elements", () => {
+      it("it returns the values in an array passing by each level", () => {
+        const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
+
+        const result = binaryTree.breadthFirstSearch();
+
+        expect(result).toEqual([10, 5, 15, 4, 7, 14, 17]);
+      });
     });
   });
 });

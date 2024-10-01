@@ -1,3 +1,5 @@
+const Queue = require("./Queue");
+
 class BinarySearchTree {
   constructor() {
     this.root = null;
@@ -84,6 +86,31 @@ class BinarySearchTree {
     while (node.left !== null) node = node.left;
 
     return node;
+  }
+
+  breadthFirstSearch() {
+    const result = [];
+    const queue = new Queue();
+
+    if (!this.root) return result;
+
+    queue.enqueue(this.root);
+
+    while (!queue.isEmpty()) {
+      const currentNode = queue.dequeue();
+
+      result[result.length] = currentNode.value;
+
+      if (currentNode.left !== null) {
+        queue.enqueue(currentNode.left);
+      }
+
+      if (currentNode.right !== null) {
+        queue.enqueue(currentNode.right);
+      }
+    }
+
+    return result;
   }
 }
 

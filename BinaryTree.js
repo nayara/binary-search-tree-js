@@ -142,6 +142,17 @@ class BinarySearchTree {
 
     return result;
   }
+
+  depthFirstSearchPreOrder(element, result = []) {
+    if (!element) return result;
+
+    result[result.length] = element.value;
+
+    if (element.left) this.depthFirstSearchPreOrder(element.left, result);
+    if (element.right) this.depthFirstSearchPreOrder(element.right, result);
+
+    return result;
+  }
 }
 
 BinarySearchTree.fromValues = function (...values) {

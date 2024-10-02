@@ -211,6 +211,38 @@ class BinarySearchTree {
 
     return result;
   }
+
+  DFSPostOrderRecursively(root, result = []) {
+    if (root === null) return [];
+
+    if (root.left) this.DFSPostOrderRecursively(root.left, result);
+    if (root.right) this.DFSPostOrderRecursively(root.right, result);
+
+    result[result.length] = root.value;
+
+    return result;
+  }
+
+  // can use the preOrder algo adjusting the stack order (first left after right) and reverse the result
+  DFSPostOrderInteractive(root, result = []) {
+    if (root === null) return [];
+
+    const stack = new Stack();
+
+    stack.push(root);
+
+    while (stack.size) {
+      const node = stack.pop();
+
+      // if wants to remove this array method needs to create an custom list with addAtStart method
+      result.unshift(node.value);
+
+      if (node.left) stack.push(node.left);
+      if (node.right) stack.push(node.right);
+    }
+
+    return result;
+  }
 }
 
 BinarySearchTree.fromValues = function (...values) {

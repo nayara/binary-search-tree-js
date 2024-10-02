@@ -396,4 +396,66 @@ describe("BinaryTree", () => {
       });
     });
   });
+
+  describe("#DFSPostOrderRecursively", () => {
+    describe("when root is null", () => {
+      it("it returns empty array", () => {
+        const binaryTree = new BinarySearchTree();
+        const result = binaryTree.DFSPostOrderRecursively(binaryTree.root);
+
+        expect(result).toEqual([]);
+      });
+    });
+
+    describe("when tree has only the root element", () => {
+      it("it return the root value", () => {
+        const binaryTree = BinarySearchTree.fromValues(4);
+
+        const result = binaryTree.DFSPostOrderRecursively(binaryTree.root);
+
+        expect(result).toEqual([4]);
+      });
+    });
+
+    describe("when tree has many elements", () => {
+      it("it returns the values in post order array", () => {
+        const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
+
+        const result = binaryTree.DFSPostOrderRecursively(binaryTree.root);
+
+        expect(result).toEqual([4, 7, 5, 14, 17, 15, 10]);
+      });
+    });
+  });
+
+  describe("#DFSPostOrderInteractive", () => {
+    describe("when root is null", () => {
+      it("it returns empty array", () => {
+        const binaryTree = new BinarySearchTree();
+        const result = binaryTree.DFSPostOrderInteractive(binaryTree.root);
+
+        expect(result).toEqual([]);
+      });
+    });
+
+    describe("when tree has only the root element", () => {
+      it("it return the root value", () => {
+        const binaryTree = BinarySearchTree.fromValues(4);
+
+        const result = binaryTree.DFSPostOrderInteractive(binaryTree.root);
+
+        expect(result).toEqual([4]);
+      });
+    });
+
+    describe("when tree has many elements", () => {
+      it("it returns the values in post order array", () => {
+        const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
+
+        const result = binaryTree.DFSPostOrderInteractive(binaryTree.root);
+
+        expect(result).toEqual([4, 7, 5, 14, 17, 15, 10]);
+      });
+    });
+  });
 });

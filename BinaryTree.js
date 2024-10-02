@@ -1,4 +1,5 @@
 const Queue = require("./Queue");
+const Stack = require("./Stack");
 
 class BinarySearchTree {
   constructor() {
@@ -143,13 +144,32 @@ class BinarySearchTree {
     return result;
   }
 
-  depthFirstSearchPreOrder(element, result = []) {
+  depthFirstSearchPreOrderRecursevely(element, result = []) {
     if (!element) return result;
 
     result[result.length] = element.value;
 
-    if (element.left) this.depthFirstSearchPreOrder(element.left, result);
-    if (element.right) this.depthFirstSearchPreOrder(element.right, result);
+    if (element.left) this.depthFirstSearchPreOrderRecursevely(element.left, result);
+    if (element.right) this.depthFirstSearchPreOrderRecursevely(element.right, result);
+
+    return result;
+  }
+
+  depthFirstSearchPreOrderStack(root) {
+    const result = [];
+    if (root === null) return result;
+
+    const stack = new Stack();
+    stack.push(root);
+
+    while (!stack.isEmpty()) {
+      const item = stack.pop();
+
+      result[result.length] = item.value;
+
+      if (item.right) stack.push(item.right);
+      if (item.left) stack.push(item.left);
+    }
 
     return result;
   }

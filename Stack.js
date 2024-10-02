@@ -15,9 +15,11 @@ class Stack {
   pop() {
     if (!this.top) return null;
 
+    const oldTop = this.top;
     this.top = this.top.next;
-
     this.size--;
+
+    return oldTop.value;
   }
 
   isEmpty() {

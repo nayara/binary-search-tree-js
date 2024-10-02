@@ -259,11 +259,13 @@ describe("BinaryTree", () => {
     });
   });
 
-  describe("#depthFirstSearchPreOrder", () => {
+  describe("#depthFirstSearchPreOrderRecursevely", () => {
     describe("when root is null", () => {
       it("it returns empty array", () => {
         const binaryTree = new BinarySearchTree();
-        const result = binaryTree.depthFirstSearchPreOrder(binaryTree.root);
+        const result = binaryTree.depthFirstSearchPreOrderRecursevely(
+          binaryTree.root
+        );
 
         expect(result).toEqual([]);
       });
@@ -273,7 +275,9 @@ describe("BinaryTree", () => {
       it("it return the root value", () => {
         const binaryTree = BinarySearchTree.fromValues(4);
 
-        const result = binaryTree.depthFirstSearchPreOrder(binaryTree.root);
+        const result = binaryTree.depthFirstSearchPreOrderRecursevely(
+          binaryTree.root
+        );
 
         expect(result).toEqual([4]);
         expect(binaryTree.root.left).toBeNull();
@@ -285,7 +289,46 @@ describe("BinaryTree", () => {
       it("it returns the values in preordered array", () => {
         const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
 
-        const result = binaryTree.depthFirstSearchPreOrder(binaryTree.root);
+        const result = binaryTree.depthFirstSearchPreOrderRecursevely(
+          binaryTree.root
+        );
+
+        expect(result).toEqual([10, 5, 4, 7, 15, 14, 17]);
+      });
+    });
+  });
+
+  describe("#depthFirstSearchPreOrderStack", () => {
+    describe("when root is null", () => {
+      it("it returns empty array", () => {
+        const binaryTree = new BinarySearchTree();
+        const result = binaryTree.depthFirstSearchPreOrderStack(
+          binaryTree.root
+        );
+
+        expect(result).toEqual([]);
+      });
+    });
+
+    describe("when tree has only the root element", () => {
+      it("it return the root value", () => {
+        const binaryTree = BinarySearchTree.fromValues(4);
+
+        const result = binaryTree.depthFirstSearchPreOrderStack(
+          binaryTree.root
+        );
+
+        expect(result).toEqual([4]);
+      });
+    });
+
+    describe("when tree has many elements", () => {
+      it("it returns the values in preordered array", () => {
+        const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
+
+        const result = binaryTree.depthFirstSearchPreOrderStack(
+          binaryTree.root
+        );
 
         expect(result).toEqual([10, 5, 4, 7, 15, 14, 17]);
       });

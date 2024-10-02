@@ -187,6 +187,30 @@ class BinarySearchTree {
 
     return result;
   }
+
+  DFSInOrderIterative(root) {
+    if (root === null) return [];
+
+    const stack = new Stack();
+    const result = [];
+    let current = root;
+
+    while (stack.size || current) {
+      while (current) {
+        stack.push(current);
+
+        current = current.left;
+      }
+
+      const last = stack.pop();
+
+      result[result.length] = last.value;
+
+      current = last.right;
+    }
+
+    return result;
+  }
 }
 
 BinarySearchTree.fromValues = function (...values) {

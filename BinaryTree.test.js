@@ -356,10 +356,41 @@ describe("BinaryTree", () => {
     });
 
     describe("when tree has many elements", () => {
-      it("it returns the values in preordered array", () => {
+      it("it returns the values in order array", () => {
         const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
 
         const result = binaryTree.DFSInOrderRecursively(binaryTree.root);
+
+        expect(result).toEqual([4, 5, 7, 10, 14, 15, 17]);
+      });
+    });
+  });
+
+  describe("#DFSInOrderIterative", () => {
+    describe("when root is null", () => {
+      it("it returns empty array", () => {
+        const binaryTree = new BinarySearchTree();
+        const result = binaryTree.DFSInOrderIterative(binaryTree.root);
+
+        expect(result).toEqual([]);
+      });
+    });
+
+    describe("when tree has only the root element", () => {
+      it("it return the root value", () => {
+        const binaryTree = BinarySearchTree.fromValues(4);
+
+        const result = binaryTree.DFSInOrderIterative(binaryTree.root);
+
+        expect(result).toEqual([4]);
+      });
+    });
+
+    describe("when tree has many elements", () => {
+      it("it returns the values in order array", () => {
+        const binaryTree = BinarySearchTree.fromValues(10, 5, 15, 14, 17, 7, 4);
+
+        const result = binaryTree.DFSInOrderIterative(binaryTree.root);
 
         expect(result).toEqual([4, 5, 7, 10, 14, 15, 17]);
       });

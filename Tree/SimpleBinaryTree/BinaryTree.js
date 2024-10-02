@@ -1,5 +1,5 @@
-const Queue = require("./Queue");
-const Stack = require("./Stack");
+const Queue = require("../../Queue/Queue");
+const Stack = require("../../Stack/Stack");
 
 class BinarySearchTree {
   constructor() {

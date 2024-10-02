@@ -259,7 +259,7 @@ describe("BinaryTree", () => {
     });
   });
 
-  describe.only("#depthFirstSearchPreOrder", () => {
+  describe("#depthFirstSearchPreOrder", () => {
     describe("when root is null", () => {
       it("it returns empty array", () => {
         const binaryTree = new BinarySearchTree();

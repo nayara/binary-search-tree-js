@@ -149,8 +149,10 @@ class BinarySearchTree {
 
     result[result.length] = element.value;
 
-    if (element.left) this.depthFirstSearchPreOrderRecursevely(element.left, result);
-    if (element.right) this.depthFirstSearchPreOrderRecursevely(element.right, result);
+    if (element.left)
+      this.depthFirstSearchPreOrderRecursevely(element.left, result);
+    if (element.right)
+      this.depthFirstSearchPreOrderRecursevely(element.right, result);
 
     return result;
   }
@@ -170,6 +172,18 @@ class BinarySearchTree {
       if (item.right) stack.push(item.right);
       if (item.left) stack.push(item.left);
     }
+
+    return result;
+  }
+
+  DFSInOrderRecursively(root, result = []) {
+    if (root === null) return [];
+
+    if (root.left) this.DFSInOrderRecursively(root.left, result);
+
+    result[result.length] = root.value;
+
+    if (root.right) this.DFSInOrderRecursively(root.right, result);
 
     return result;
   }

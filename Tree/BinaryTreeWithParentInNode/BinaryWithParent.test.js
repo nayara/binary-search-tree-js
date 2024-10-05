@@ -89,7 +89,7 @@ describe("BinaryTreeWithParent", () => {
       it("it returns null if does not have parent", () => {
         const binaryTree = BinaryTree.fromValues(10, 14, 20);
 
-        console.log(binaryTree.root.parent)
+        console.log(binaryTree.root.parent);
 
         const result = binaryTree.findPreOrderSuccessor(binaryTree.root);
 
@@ -121,15 +121,52 @@ describe("BinaryTreeWithParent", () => {
 
         expect(result.value).toBe(9);
       });
+    });
+  });
 
-      it("it retuns null when do not have a parent", () => {
-        const binaryTree = BinaryTree.fromValues(10, 8, 3, 6, 5, 7);
+  describe("#findInOrderSuccessor", () => {
+    describe("when the current node does not exists", () => {
+      it("it returns null", () => {
+        const binaryTree = new BinaryTree();
 
-        const lastRightElementOnTree = binaryTree.root.left.left.right.right;
-
-        const result = binaryTree.findPreOrderSuccessor(lastRightElementOnTree);
+        const result = binaryTree.findInOrderSuccessor(binaryTree.root);
 
         expect(result).toBeNull();
+      });
+    });
+
+    describe("when the current node exists", () => {
+      describe("and has right child node", () => {
+        it("it returns the leftmost node on the right subtree", () => {
+          const binaryTree = BinaryTree.fromValues(
+            20,
+            10,
+            30,
+            5,
+            15,
+            18,
+            16,
+            18
+          );
+
+          const result = binaryTree.findInOrderSuccessor(
+            binaryTree.root.left.right
+          );
+
+          expect(result).toBe(16);
+        });
+      });
+
+      describe("and is the last right child node", () => {
+        it("it returns the first parent with subtree at right", () => {
+          const binaryTree = BinaryTree.fromValues(20, 10, 30, 5, 15, 7, 6, 9);
+
+          const lastLevelRightNode = binaryTree.root.left.left.right.right;
+
+          const result = binaryTree.findInOrderSuccessor(lastLevelRightNode);
+
+          expect(result).toBe(10);
+        });
       });
     });
   });

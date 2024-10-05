@@ -48,6 +48,26 @@ class BinaryTree {
     return parent.right;
   }
 
+  findInOrderSuccessor(node) {
+    if (!node) return null;
+
+    if (node.right) {
+      let current = node.right;
+
+      while (current && current.left) current = current.left;
+      return current.value;
+    }
+
+    let parent = node.parent;
+
+    while (parent && parent.right === node) {
+      node = parent;
+      parent = parent.parent;
+    }
+
+    return parent.value;
+  }
+
   findPostOrderSuccessor(node) {
     if (!node) return null;
 

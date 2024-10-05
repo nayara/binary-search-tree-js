@@ -86,6 +86,16 @@ describe("BinaryTreeWithParent", () => {
     });
 
     describe("when current node exists", () => {
+      it("it returns null if does not have parent", () => {
+        const binaryTree = BinaryTree.fromValues(10, 14, 20);
+
+        console.log(binaryTree.root.parent)
+
+        const result = binaryTree.findPreOrderSuccessor(binaryTree.root);
+
+        expect(result).toBeNull();
+      });
+
       it("it retuns left node if exists", () => {
         const binaryTree = BinaryTree.fromValues(10, 7, 18, 8, 6, 19, 17);
 
@@ -119,9 +129,85 @@ describe("BinaryTreeWithParent", () => {
 
         const result = binaryTree.findPreOrderSuccessor(lastRightElementOnTree);
 
-        binaryTree.printTree();
+        expect(result).toBeNull();
+      });
+    });
+  });
+
+  describe("#findPostOrderSuccessor", () => {
+    describe("when current node does not exists", () => {
+      it("it returns null", () => {
+        const binaryTree = new BinaryTree();
+
+        const result = binaryTree.findPostOrderSuccessor();
 
         expect(result).toBeNull();
+      });
+    });
+
+    describe("when current node exists", () => {
+      describe("if the node is the tree root", () => {
+        it("it returns null", () => {
+          const binaryTree = BinaryTree.fromValues(10, 14, 20);
+
+          const result = binaryTree.findPostOrderSuccessor(binaryTree.root);
+
+          expect(result).toBeNull();
+        });
+      });
+
+      describe("if the node is the right child of parent", () => {
+        it("it retuns the parent", () => {
+          const binaryTree = BinaryTree.fromValues(
+            20,
+            10,
+            30,
+            5,
+            15,
+            18,
+            16,
+            19
+          );
+
+          const rightChildNode = binaryTree.root.left.left;
+
+          const result = binaryTree.findPostOrderSuccessor(rightChildNode);
+
+          expect(result).toBe(16);
+        });
+      });
+
+      describe("when the node is the last child of tree", () => {
+        describe("if was the last left child", () => {
+          it("it returns the left most node in the right sibling subtree", () => {
+            const binaryTree = BinaryTree.fromValues(30, 20, 40, 15, 25);
+
+            const rightChildNode = binaryTree.root.left.right;
+
+            const result = binaryTree.findPostOrderSuccessor(rightChildNode);
+
+            expect(result).toBe(20);
+          });
+
+          it("it returns the parent when do not have right sibling", () => {
+            const binaryTree = BinaryTree.fromValues(
+              20,
+              10,
+              30,
+              5,
+              15,
+              18,
+              16,
+              19
+            );
+
+            const lastLeftChildNode = binaryTree.root.left.right.right.left;
+
+            const result = binaryTree.findPostOrderSuccessor(lastLeftChildNode);
+
+            expect(result).toBe(19);
+          });
+        });
       });
     });
   });
